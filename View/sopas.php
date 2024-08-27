@@ -66,8 +66,6 @@
          <h2 class="ftco-heading-2">Integrantes de nuestro equipo:</h2>
         <p> Juan Carlos Campos Garcia </p>
         <p> Katherine Virginia Benavides Gutierrez</p>
-        <p> Gerald Arturo Rodriguez Hernandez</p>
-        <p> Isaac Alberto Hidalgo Vargas</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>

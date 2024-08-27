@@ -9,19 +9,19 @@
     HeadCSS();
 ?>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" >
     <div class="wrapper">
 
-        <?php 
-          MostrarNav();
+    <?php 
+          MostrarMenu();
         ?>
 
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-image: url(/images/bg_4.jpg);">
             <section class="content">
 
                 <div class="content-header">
                     <div class="container-fluid">
-                        <h1 class="m-0 text-dark">Datos de seguridad</h1>
+                        <h1 class="m-0" style= "color: #fac564;">Datos de seguridad</h1>
                         <br />
                         <div class="row mb-2">
                             <div class="col-sm-2">
@@ -37,7 +37,7 @@
 
                                 <form action="" method="post">
 
-                                    <Label>Nueva Contraseña</Label>
+                                    <Label style= "color: #fac564;">Nueva Contraseña</Label>
                                     <div class="input-group mb-3">
                                         <input type="password" id="txtPasswordNueva" name="txtPasswordNueva" class="form-control"
                                             placeholder="Contraseña" required>
@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
 
-                                    <Label>Confirmar Contraseña</Label>
+                                    <Label style= "color: #fac564;">Confirmar Contraseña</Label>
                                     <div class="input-group mb-3">
                                         <input type="password" id="txtPasswordConfirmar" name="txtPasswordConfirmar" class="form-control"
                                             placeholder="Contraseña" required>

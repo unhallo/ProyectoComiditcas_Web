@@ -27,9 +27,10 @@
                 {
                   echo '
 	          <li class="nav-item active"><a href="home.php" class="nav-link">Inicio</a></li>
-			      <li class="nav-item"><a href="login.php" class="nav-link">Cerrar sesion</a></li>
-            <li class="nav-item"><a href="gestionRestaurante.php" class="nav-link">Gestion de Restaurantes</a></li>
-            <li class="nav-item"><a href="gestionRecetas.php" class="nav-link">Gestion de Recetas</a></li>
+			      <li class="nav-item"><a href="login.php" class="nav-link">Cerrar sesión</a></li>
+            <li class="nav-item"><a href="consultarRestaurantes.php" class="nav-link">Gestión de Restaurantes</a></li>
+            <li class="nav-item"><a href="consultarSouvenirs.php" class="nav-link">Gestión de Souvenirs</a></li>
+            <li class="nav-item"><a href="gestionRecetas.php" class="nav-link">Gestión de Recetas</a></li>
             ';
                 }
             else
@@ -48,6 +49,7 @@
           </ul>
         </li>
         <li class="nav-item"><a href="restaurantes.php" class="nav-link">Restaurantes</a></li>
+        <li class="nav-item"><a href="souvenirs.php" class="nav-link">Souvenirs</a></li>
         <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" role="button" data-db-toggle="dropdown" aria-expanded="true">
            '
@@ -56,14 +58,16 @@
             '
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <li><a class="dropdown-item" href="actualizarPerfil.php"><i class="fas fa-envelope mr-2"></i> Actualizar Perfil</a></li>
-                <li><a class="dropdown-item" href="actualizarContrasenna.php"><i class="fas fa-users mr-2"></i> Actualizar Contraseña</a></li>
-                <li><a class="dropdown-item" href="misRecetas.php"><i class="fas fa-users mr-2"></i> Mis Recetas</a></li>
+                <li><a class="dropdown-item" href="actualizarPerfil.php"><i class="fa fa-user-circle mr-2"></i> Actualizar Perfil</a></li>
+                <li><a class="dropdown-item" href="actualizarContrasenna.php"><i class="fa fa-lock mr-2"></i> Actualizar Contraseña</a></li>
+                <li><a class="dropdown-item" href="misRecetas.php"><i class="fa fa-book mr-2"></i> Mis Recetas</a></li>
+                <li><a class="dropdown-item" href="consultarCarrito.php"><i class="fa fa-shopping-cart mr-2"></i> Mi Carrito</a></li>
+                <li><a class="dropdown-item" href="consultarFacturas.php"><i class="fa fa-shopping-bag mr-2"></i> Mis Compras</a></li>
                 <div class="dropdown-divider"></div>
 
                 <form action="" method="POST">
                     <button id="btnCerrarSesion" name="btnCerrarSesion" type="submit" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> Salir
+                        <i class="fa fa-reply mr-2"></i> Salir
                     </button>
                 </form>
                 </ul>

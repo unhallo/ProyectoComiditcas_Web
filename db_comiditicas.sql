@@ -18,6 +18,36 @@ USE `db_comiditicas`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `carrito`
+--
+
+DROP TABLE IF EXISTS `carrito`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `carrito` (
+  `IdCarrito` int(11) NOT NULL,
+  `Consecutivo` int(11) DEFAULT NULL,
+  `IdSouvenir` int(11) DEFAULT NULL,
+  `Cantidad` int(11) DEFAULT NULL,
+  `Fecha` datetime DEFAULT NULL,
+  PRIMARY KEY (`IdCarrito`),
+  KEY `fk_Consecutivo_idx` (`Consecutivo`),
+  KEY `fk_IdSouvenir_idx` (`IdSouvenir`),
+  CONSTRAINT `fk_Consecutivo` FOREIGN KEY (`Consecutivo`) REFERENCES `usuario` (`Consecutivo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_IdSouvenir` FOREIGN KEY (`IdSouvenir`) REFERENCES `souvenir` (`IdSouvenir`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carrito`
+--
+
+LOCK TABLES `carrito` WRITE;
+/*!40000 ALTER TABLE `carrito` DISABLE KEYS */;
+/*!40000 ALTER TABLE `carrito` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `dificultad_receta`
 --
 
@@ -42,40 +72,37 @@ INSERT INTO `dificultad_receta` VALUES (1,'Facil'),(2,'Media'),(3,'Dificil'),(4,
 UNLOCK TABLES;
 
 --
--- Table structure for table `direccion_rest`
+-- Table structure for table `provincia`
 --
 
-DROP TABLE IF EXISTS `direccion_rest`;
+DROP TABLE IF EXISTS `provincia`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `direccion_rest` (
-  `Cod_postal` int(11) NOT NULL,
-  `Cod_direc_rest` int(11) NOT NULL,
-  `Provincia` varchar(25) NOT NULL,
-  `Canton` varchar(25) NOT NULL,
-  `Distrito` varchar(25) NOT NULL,
-  `Direcc_exact` varchar(200) NOT NULL,
-  PRIMARY KEY (`Cod_postal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `provincia` (
+  `IdProvincia` int(11) NOT NULL AUTO_INCREMENT,
+  `NombreProvincia` varchar(25) NOT NULL,
+  PRIMARY KEY (`IdProvincia`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `direccion_rest`
+-- Dumping data for table `provincia`
 --
 
-LOCK TABLES `direccion_rest` WRITE;
-/*!40000 ALTER TABLE `direccion_rest` DISABLE KEYS */;
-/*!40000 ALTER TABLE `direccion_rest` ENABLE KEYS */;
+LOCK TABLES `provincia` WRITE;
+/*!40000 ALTER TABLE `provincia` DISABLE KEYS */;
+INSERT INTO `provincia` VALUES (1,'San José'),(2,'Alajuela'),(3,'Cartago'),(4,'Heredia'),(5,'Guanacaste'),(6,'Puntarenas'),(7,'Limón');
+/*!40000 ALTER TABLE `provincia` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `recetas`
+-- Table structure for table `receta`
 --
 
-DROP TABLE IF EXISTS `recetas`;
+DROP TABLE IF EXISTS `receta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recetas` (
+CREATE TABLE `receta` (
   `Cod_Recetas` int(11) NOT NULL,
   `Cod_tipo_receta` int(11) NOT NULL,
   `Cod_Dificultad` int(11) NOT NULL,
@@ -93,39 +120,41 @@ CREATE TABLE `recetas` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `recetas`
+-- Dumping data for table `receta`
 --
 
-LOCK TABLES `recetas` WRITE;
-/*!40000 ALTER TABLE `recetas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recetas` ENABLE KEYS */;
+LOCK TABLES `receta` WRITE;
+/*!40000 ALTER TABLE `receta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `receta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `restaurantes`
+-- Table structure for table `restaurante`
 --
 
-DROP TABLE IF EXISTS `restaurantes`;
+DROP TABLE IF EXISTS `restaurante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `restaurantes` (
-  `Cod_rest` int(11) NOT NULL AUTO_INCREMENT,
-  `Cod_post` int(11) NOT NULL,
-  `Nombre_rest` varchar(100) NOT NULL,
-  `Horario` datetime NOT NULL,
-  PRIMARY KEY (`Cod_rest`),
-  KEY `fk_Cod_post_idx` (`Cod_post`),
-  CONSTRAINT `fk_Cod_post` FOREIGN KEY (`Cod_post`) REFERENCES `direccion_rest` (`Cod_postal`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `restaurante` (
+  `IdRestaurante` int(11) NOT NULL AUTO_INCREMENT,
+  `IdProvincia` int(11) NOT NULL,
+  `DireccExact` varchar(200) NOT NULL,
+  `NombreRest` varchar(100) NOT NULL,
+  `Imagen` varchar(255) NOT NULL,
+  PRIMARY KEY (`IdRestaurante`),
+  KEY `FK_Id_Provinica_idx` (`IdProvincia`),
+  CONSTRAINT `FK_Id_Provincia` FOREIGN KEY (`IdProvincia`) REFERENCES `provincia` (`IdProvincia`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `restaurantes`
+-- Dumping data for table `restaurante`
 --
 
-LOCK TABLES `restaurantes` WRITE;
-/*!40000 ALTER TABLE `restaurantes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `restaurantes` ENABLE KEYS */;
+LOCK TABLES `restaurante` WRITE;
+/*!40000 ALTER TABLE `restaurante` DISABLE KEYS */;
+INSERT INTO `restaurante` VALUES (4,0,'25 sur de la iglesia','La cazona ','/View/Images/LaCazona.jpeg'),(5,1,'25 oeste de la iglesia','La Cazona de Lali','/View/Images/LaCazona.jpeg'),(6,3,'100 metros sur del parque','Nuestra tierra','/View/Images/NuestraTierra.jpeg');
+/*!40000 ALTER TABLE `restaurante` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -148,8 +177,35 @@ CREATE TABLE `rol` (
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` VALUES (1,'Admin'),(2,'User');
+INSERT INTO `rol` VALUES (1,'Usuario'),(2,'Administrador');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `souvenir`
+--
+
+DROP TABLE IF EXISTS `souvenir`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `souvenir` (
+  `IdSouvenir` int(11) NOT NULL AUTO_INCREMENT,
+  `Cantidad` int(11) NOT NULL,
+  `Nombre` varchar(255) NOT NULL,
+  `Precio` decimal(10,2) NOT NULL,
+  `Imagen` varchar(255) NOT NULL,
+  PRIMARY KEY (`IdSouvenir`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `souvenir`
+--
+
+LOCK TABLES `souvenir` WRITE;
+/*!40000 ALTER TABLE `souvenir` DISABLE KEYS */;
+INSERT INTO `souvenir` VALUES (3,25,'Peluches',3000.00,'/View/Images/Peluches.jpg'),(4,10,'Encendedores',3000.00,'/View/Images/Encendedores.jpeg');
+/*!40000 ALTER TABLE `souvenir` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -205,7 +261,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'117410474','Admin','admin@gmail.com','123',_binary '',2),(2,'116800206','kath','kath@gmail.com','456',_binary '',1);
+INSERT INTO `usuario` VALUES (1,'117410474','Admin','admin@gmail.com','123',_binary '',2),(2,'','kath','kath@gmail.com','456',_binary '',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +296,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `ActualizarDatosRestaurante` */;
+/*!50003 DROP PROCEDURE IF EXISTS `ActualizarRestaurante` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -250,23 +306,28 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarDatosRestaurante`(
-    IN p_Id INT,
-    IN p_Horario datetime,
-    IN p_Nombre VARCHAR(100)
-)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarRestaurante`(
+`pIdRestaurante` INT,
+`pNombreRest` VARCHAR(100),
+`pIdProvincia` INT,
+`pDireccExact` VARCHAR(200),
+`pImagen` VARCHAR(255))
 BEGIN
-    UPDATE restaurantes
-    SET Horario = p_Horario,
-        Nombre = p_Nombre
-    WHERE Id = p_Id;
+
+	UPDATE restaurante
+	SET NombreRest = pNombreRest,
+		IdProvincia = pIdProvincia,
+		DireccExact = pDireccExact,
+		Imagen = CASE WHEN pImagen = '' THEN Imagen ELSE pImagen END
+	WHERE IdRestaurante = pIdRestaurante;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `ActualizarDireccionRestaurante` */;
+/*!50003 DROP PROCEDURE IF EXISTS `ActualizarSouvenir` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -276,20 +337,21 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarDireccionRestaurante`(
-    IN p_Cod_direcc_rest INT,
-    IN p_Provincia VARCHAR(25),
-    IN p_Canton VARCHAR(25),
-    IN P_Distrito VARCHAR(25),
-    IN p_Direccexact VARCHAR(200)
-)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarSouvenir`(
+`pIdSouvenir` INT,
+`pNombre` VARCHAR(255),
+`pPrecio` DECIMAL(10,2),
+`pCantidad` INT,
+`pImagen` VARCHAR(255))
 BEGIN
-    UPDATE direccion_rest
-    SET Provincia = p_Provincia,
-        Canton = p_Canton,
-        Distrito = p_Distrito,
-        Direccexact = p_Diereccexact
-    WHERE Cod_direcc_rest = p_Cod_direcc_rest;
+
+	UPDATE souvenir
+	SET Cantidad = pCantidad,
+		Nombre = pNombre,
+		Precio = pPrecio,
+		Imagen = CASE WHEN pImagen = '' THEN Imagen ELSE pImagen END
+	WHERE IdSouvenir = pIdSouvenir;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -323,50 +385,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `BorrarDireccion` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `BorrarDireccion`(
-    IN p_Cod_direcc_rest INT
-)
-BEGIN
-    DELETE FROM direccion_rest
-    WHERE Cod_direcc_rest = p_cod_direcc_rest;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `BorrarRestaurante` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `BorrarRestaurante`(
-    IN p_Cod_rest INT
-)
-BEGIN
-    DELETE FROM restaurantes
-    WHERE Id = p_cod_rest;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `CambiarEstadoUsuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -385,6 +403,111 @@ BEGIN
 	UPDATE USUARIO
     SET Estado = CASE WHEN Estado = 1 THEN 0 ELSE 1 END
     WHERE Consecutivo = pConsecutivo;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarProvincias` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarProvincias`()
+BEGIN
+
+	SELECT `provincia`.`IdProvincia`,
+		`provincia`.`NombreProvincia`
+	FROM `db_comiditicas`.`provincia`;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarRestaurante` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarRestaurante`(`pConsecutivo` INT)
+BEGIN
+
+	SELECT  IdRestaurante,
+			p.IdProvincia,
+            DireccExact,
+			NombreRest,
+			Imagen,
+            c.NombreProvincia
+		FROM restaurante p
+        INNER JOIN provincia c ON p.IdProvincia = c.IdProvincia
+        WHERE IdRestaurante = pConsecutivo;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarRestaurantes` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarRestaurantes`()
+BEGIN
+
+	SELECT  IdRestaurante,
+			NombreRest,
+			p.IdProvincia,
+			DireccExact,
+			Imagen,
+			c.NombreProvincia
+		FROM restaurante p
+		INNER JOIN provincia c ON p.IdProvincia = c.IdProvincia;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarResumenCarrito` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarResumenCarrito`(`pConsecutivo` INT)
+BEGIN
+
+	SELECT 	IFNULL(SUM(C.Cantidad),0) 'Cantidad', 
+			IFNULL(SUM(C.Cantidad * P.Precio),0) 'SubTotal',
+            IFNULL(SUM(C.Cantidad * P.Precio) + SUM(C.Cantidad * P.Precio) * 0.13,0) 'Total'
+    FROM 	carrito C
+    INNER JOIN souvenir P ON C.IdSouvenir = P.IdSouvenir
+    WHERE 	Consecutivo = pConsecutivo;
 
 END ;;
 DELIMITER ;
@@ -414,6 +537,59 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarSouvenir` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarSouvenir`(`pConsecutivo` INT)
+BEGIN
+
+	SELECT  IdSouvenir,
+			Cantidad,
+			Nombre,
+			Precio,
+			Imagen
+		FROM souvenir p
+        WHERE IdSouvenir = pConsecutivo;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarSouvenirs` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarSouvenirs`()
+BEGIN
+
+	SELECT  IdSouvenir,
+			Cantidad,
+			Nombre,
+			Precio,
+			Imagen
+		FROM souvenir p;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `ConsultarUsuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -436,7 +612,7 @@ BEGIN
             R.`NombreRol`,
             CASE WHEN `Estado` = 1 THEN 'Activo' ELSE 'Inactivo' END 'NombreEstado'
 	FROM 	`db_comiditicas`.`usuario` U
-    INNER JOIN `bd_comiditicas`.`rol` R ON U.IdRol = R.IdRol
+    INNER JOIN `db_comiditicas`.`rol` R ON U.IdRol = R.IdRol
     WHERE `Consecutivo` = `pConsecutivo`;
 
 END ;;
@@ -467,7 +643,7 @@ BEGIN
             R.`NombreRol`,
             CASE WHEN `Estado` = 1 THEN 'Activo' ELSE 'Inactivo' END 'NombreEstado'
 	FROM 	`db_comiditicas`.`usuario` U
-    INNER JOIN `bd_comiditicas`.`rol` R ON U.IdRol = R.IdRol
+    INNER JOIN `db_comiditicas`.`rol` R ON U.IdRol = R.IdRol
     WHERE `Consecutivo` <> `pConsecutivo`;
 
 END ;;
@@ -532,7 +708,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `Llamar_direcciones` */;
+/*!50003 DROP PROCEDURE IF EXISTS `RegistrarCarrito` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -542,60 +718,28 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Llamar_direcciones`()
-BEGIN
-    SELECT `Cod_postal`,
-			`Provincia`,
-			`Canton`,
-            `Distrito`,
-            `Direcc_exac`
-	FROM 	`db_comiditicas`.`direccion_rest`
-	WHERE 	Cod_postal = `pCod_postal`;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `Llamar_restaurantes` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Llamar_restaurantes`()
-BEGIN
-    SELECT * FROM restaurantes;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `RegistrarDireccion` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarDireccion`(
-`pCod_postal` int(11),
-`pProvincia` varchar(25),
-`pCanton` varchar(25),
-`pDistrito` varchar(25),
-`pDireccexact` varchar(200))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarCarrito`(
+`pConsecutivo` INT,
+`pIdSouvenir` INT,
+`pCantidad` INT)
 BEGIN
 
-	INSERT INTO direccion_rest( Cod_post, Provincia, Canton, Distrito, Direccexac)
-	VALUES(pProvincia,pCanton,pDistrito,pDireccexac);
+	IF(	SELECT COUNT(1) FROM carrito
+		WHERE Consecutivo = pConsecutivo
+		AND IdSouvenir = pIdSouvenir) = 0
+	THEN
+    
+		INSERT INTO carrito(Consecutivo,IdSouvenir,Cantidad,Fecha)
+		VALUES (pConsecutivo,pIdSouvenir,pCantidad,NOW());
+    
+    ELSE
+    
+		UPDATE carrito
+		SET	Cantidad = pCantidad
+		WHERE 	Consecutivo = pConsecutivo
+			AND IdSouvenir = pIdSouvenir;
+
+    END IF;
 
 END ;;
 DELIMITER ;
@@ -614,13 +758,40 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarRestaurante`(
-`pCod_post` int(11), 
-`pNombre` varchar(100), 
-`pHorario` datetime)
+`pNombreRest` VARCHAR(100),
+`pIdProvincia` VARCHAR(25),
+`pDireccExact` VARCHAR(200),
+`pImagen` VARCHAR(255))
 BEGIN
 
-	INSERT INTO restaurante( Cod_post, Nombre,Horario)
-	VALUES(pCod_post,pNombre,pHorario);
+	INSERT INTO restaurante(NombreRest,IdProvincia,DireccExact,Imagen)
+	VALUES (pNombreRest,pIdProvincia,pDireccExact,pImagen);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `RegistrarSouvenir` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarSouvenir`(
+`pNombre` VARCHAR(255),
+`pPrecio` DECIMAL(10,2),
+`pCantidad` INT,
+`pImagen` VARCHAR(255))
+BEGIN
+
+	INSERT INTO souvenir(Cantidad,Nombre,Precio,Imagen)
+	VALUES (pCantidad,pNombre,pPrecio,pImagen);
 
 END ;;
 DELIMITER ;
@@ -660,4 +831,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-08 17:35:13
+-- Dump completed on 2024-08-15 22:02:40

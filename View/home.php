@@ -66,8 +66,6 @@
         <h2 class="ftco-heading-2">Integrantes de nuestro equipo:</h2>
         <p> Juan Carlos Campos Garcia </p>
         <p> Katherine Virginia Benavides Gutierrez</p>
-        <p> Gerald Arturo Rodriguez Hernandez</p>
-        <p> Isaac Alberto Hidalgo Vargas</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -76,7 +74,7 @@
             </div>
           </div>
 	    		<div class="col-md-6 appointment ftco-animate">
-          <h3 class="mb-3"><small style= "color: #fac564;">Si tienes alguna receta o un restautante tipico que quieras compartir con nosotros</small>
+          <h3 class="mb-3"><small style= "color: #fac564;">Si tienes alguna receta o un restautante típico que quieras compartir con nosotros</small>
               <br>Contactanos
           </h3>
 	    			<form action="#" class="appointment-form">
@@ -106,16 +104,7 @@
     	<div class="overlay"></div>
       <div class="container">
 
-          <div class="col-lg-2 col-md-6 mb-5 mb-md-5">
-             <div class="ftco-footer-widget mb-4 ml-md-4">
-              <h2 class="ftco-heading-2">Servicios</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Recetas</a></li>
-                <li><a href="#" class="py-2 d-block">Blog Informativo</a></li>
-                <li><a href="#" class="py-2 d-block">Calidad de comidas</a>
-              </ul>
-            </div>
-          </div>
+          
           <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
             <div class="ftco-footer-widget mb-4">
             	<h2 class="ftco-heading-2">Consultas </h2>

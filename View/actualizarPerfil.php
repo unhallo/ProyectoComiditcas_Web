@@ -16,16 +16,15 @@
     <div class="wrapper">
 
         <?php 
-          MostrarNav();
           MostrarMenu();
         ?>
 
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-image: url(/images/bg_4.jpg);">
             <section class="content">
 
                 <div class="content-header">
                     <div class="container-fluid">
-                        <h1 class="m-0 text-dark">Datos del perfil</h1>
+                        <h1 class="m-0" style= "color: #fac564;">Datos del perfil</h1>
                         <br />
                         <div class="row mb-2">
                             <div class="col-sm-2">
@@ -43,7 +42,7 @@
 
                                     <input id="txtConsecutivo" name="txtConsecutivo" type="hidden" value="<?php echo $datos["Consecutivo"] ?>">
 
-                                    <Label>Identificación</Label>
+                                    <Label style= "color: #fac564;">Identificación</Label>
                                     <div class="input-group mb-3">
                                         <input id="txtIdentificacion" name="txtIdentificacion" type="text"
                                             class="form-control" placeholder="Identificación"
@@ -56,7 +55,7 @@
                                         </div>
                                     </div>
 
-                                    <Label>Nombre</Label>
+                                    <Label style= "color: #fac564;">Nombre</Label>
                                     <div class="input-group mb-3">
                                         <input id="txtNombre" name="txtNombre" type="text" readOnly class="form-control"
                                             placeholder="Nombre" required value="<?php echo $datos["Nombre"] ?>">
@@ -67,7 +66,7 @@
                                         </div>
                                     </div>
 
-                                    <Label>Correo Electrónico</Label>
+                                    <Label style= "color: #fac564;">Correo Electrónico</Label>
                                     <div class="input-group mb-3">
                                         <input type="email" id="txtEmail" name="txtEmail" class="form-control"
                                             placeholder="Correo Electrónico" required
@@ -79,7 +78,7 @@
                                         </div>
                                     </div>
 
-                                    <Label>Perfil</Label>
+                                    <Label style= "color: #fac564;">Perfil</Label>
                                     <div class="input-group mb-3">
                                         <select disabled id="selectRol" name="selectRol" class="form-control" required>
                                             <?php ConsultarRoles($datos["IdRol"]); ?>
@@ -104,10 +103,14 @@
 
             </section>
         </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
 
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2024 </strong>
-        </footer>
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
 
         <aside class="control-sidebar control-sidebar-dark">
         </aside>

@@ -28,10 +28,28 @@
         return $respuesta;
     }
 
+    function ConsultarUsuariosBD($ConsecutivoLogueado)
+    {
+        $conexion = AbrirBaseDatos();
+        $sentencia = "CALL ConsultarUsuarios('$ConsecutivoLogueado')";
+        $respuesta = $conexion -> query($sentencia);
+        CerrarBaseDatos($conexion);
+        return $respuesta;
+    }
+
     function CambiarEstadoUsuario($Consecutivo)
     {
         $conexion = AbrirBaseDatos();
         $sentencia = "CALL CambiarEstadoUsuario('$Consecutivo')";
+        $respuesta = $conexion -> query($sentencia);
+        CerrarBaseDatos($conexion);
+        return $respuesta;
+    }
+
+    function ConsultarUsuarioBD($Consecutivo)
+    {
+        $conexion = AbrirBaseDatos();
+        $sentencia = "CALL ConsultarUsuario('$Consecutivo')";
         $respuesta = $conexion -> query($sentencia);
         CerrarBaseDatos($conexion);
         return $respuesta;

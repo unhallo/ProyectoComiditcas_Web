@@ -1,55 +1,61 @@
-<?php include_once 'layoutInterno.php'; ?>
+<?php include_once 'layoutInterno.php'; 
+      include_once '../Controller/restauranteController.php';
+?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
   
 <?php 
     HeadCSS();
 ?>
-  <body>
+ 
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
   <?php 
           
           MostrarMenu();
         ?>
 
-    <section class="home-slider owl-carousel img" style="background-image: url(/images/bg_1.jpg);">
-      <div class="slider-item">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text align-items-center" data-scrollax-parent="true">
+<div class="content-wrapper"  style="background-image: url(/images/bg_4.jpg);">
+    <section class="content">
 
-            <div class="col-md-6 col-sm-12 ftco-animate">
-            	<span class="subheading">Delicioso</span>
-              <h1 class="mb-4">Tamal costarricense</h1>
-              <p class="mb-4 mb-md-5">Con el sazón de nuestra tierra y el cariño de nuestras manos, ¡nuestras recetas te harán sentir como en casa, aunque estés lejos! ¡Pura vida en cada mordisco!</p>
-              
-            </div>
-            <div class="col-md-6 ftco-animate">
-            	<img src="/images/tamal.jpg" class="img-fluid" alt="">
-            </div>
+      <div class="content-header">
+            <div class="container-fluid">
+                  <div class="row mb-2">
+                      <div class="col-sm-12">
+                            <h1 class="m-0" style= "color: #fac564;">Restaurantes Típicos</h1>
+                            <br/>
 
-          </div>
-        </div>
-      </div>
+                            <?php
+                                if(isset($_POST["msj"]))
+                                {
+                                  echo '<div class="alert alert-info TextoCentrado">' . $_POST["msj"] . '</div>';
+                                }
+                            ?>
+                          <br/>
 
-      <div class="slider-item" style="background-image: url(images/bg_3.jpg);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+                          <table style= "color: #fac564;" id="tablaRestaurantes" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Provincia</th>
+                                    <th>Dirección Exacta</th>
+                                    <th>Imagen</th>
+                                </tr>
+                            </thead>
+                          <tbody>
+                            <?php
+                                ConsultarRestaurantesLista();
+                            ?>
+                          </tbody>
+                        </table>   
+                      </div>
+                    </div>
 
-            <div class="col-md-7 col-sm-12 text-center ftco-animate">
-            	<span class="subheading">Bienvenido</span>
-              <h1 class="mb-4">Te enseñamos a cocinar tu tamal a tu gusto!</h1>
-              <p class="mb-4 mb-md-5">Con el sazón de nuestra tierra y el cariño de nuestras manos, ¡nuestras recetas te harán sentir como en casa, aunque estés lejos! ¡Pura vida en cada mordisco!</p>
-    
-            </div>
-
-          </div>
-        </div>
-      </div>
+      
     </section>
-
-		
+    
+     
 		<section class="ftco-appointment">
     <div class="overlay"></div>
       <div class="container">
@@ -66,8 +72,6 @@
          <h2 class="ftco-heading-2">Integrantes de nuestro equipo:</h2>
         <p> Juan Carlos Campos Garcia </p>
         <p> Katherine Virginia Benavides Gutierrez</p>
-        <p> Gerald Arturo Rodriguez Hernandez</p>
-        <p> Isaac Alberto Hidalgo Vargas</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
