@@ -1,5 +1,7 @@
 <?php   include_once 'layoutInterno.php';
-        include_once '../Controller/carritoController.php';
+        include_once '../Controller/usuarioController.php';
+      
+        ValidarRolAdministrador();
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +25,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-12">
-                                <h1 class="m-0" style= "color: #fac564;">Mi Carrito</h1>
+                                <h1 class="m-0" style= "color: #fac564;">Consulta de mensajes</h1>
                                 <br/>
 
                                 <?php
@@ -33,43 +35,21 @@
                                     }
                                 ?>
 
-                                <table style= "color: #fac564;" id="tablaCarrito" class="table table-bordered">
+                                <table style= "color: #fac564;" id="tablaMensajes" class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Souvenir</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>                                            
-                                            <th>SubTotal</th>
-                                            <th>Impuesto</th>
-                                            <th>Total</th>
-                                            <th>Acciones</th>
+                                            <th>Fecha</th>
+                                            <th>Nombre</th>
+                                            <th>Apellidos</th>
+                                            <th>Mensaje</th>
+                                            <th>Estado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                            ConsultarCarrito();
-                                            ConsultarResumenCarrito();
-                                        ?>
+                                        
                                     </tbody>
                                 </table>
 
-                                <br /><br />
-
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 col-sm-6">
-                                        <p style="font-size:14pt; margin-top:2%">El monto a cancelar es de: <b>¢<?php echo number_format($_SESSION["Total"],2) ?></b> </p>
-                                    </div>
-                                    <div class="col-lg-3 col-md-4 col-sm-6">
-                                        <form action="" method="POST">
-                                            <?php
-                                                if($_SESSION["Total"] != "0")
-                                                {
-                                                    echo '<button id="btnPagarCarrito" name="btnPagarCarrito" type="submit" class="btn btn-outline-primary" style="width:200px">Pagar</button>';
-                                                }
-                                            ?>    
-                                        </form>                              
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
@@ -91,12 +71,44 @@
         <aside class="control-sidebar control-sidebar-dark">
         </aside>
     </div>
+
+    <div class="modal fade" id="ModalMensajes" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:600px;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalle del mensaje</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="" method="POST">
+                    <div class="modal-body">
+                        <input type="hidden" id="txtConsecutivo" name="txtConsecutivo">
+                        ¿Desea cambiar el estado del mensaje <label id="lblMensaje"></label> ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="btnCambiarEstadoMensaje"
+                            name="btnCambiarEstadoMensaje">Procesar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
     <?php 
         HeadJS();
     ?>
     <script>
+        $(document).on("click", ".AbrirModal", function() {
+            $("#lblMensaje").text($(this).attr('data-mensaje'));
+            $("#txtConsecutivo").val($(this).attr('data-id'));
+        });
+
         $(document).ready(function(){
-            $("#tablaCarrito").DataTable({
+            $("#tablaMensajes").DataTable({
                 language : {
                     url: 'dist/language.json'
                 },

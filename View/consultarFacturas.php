@@ -16,7 +16,7 @@
           MostrarMenu();
         ?>
 
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-image: url(/images/bg_4.jpg);">
             <section class="content">
 
                 <div class="content-header">
