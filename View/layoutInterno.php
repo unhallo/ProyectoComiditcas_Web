@@ -30,8 +30,7 @@
 			      <li class="nav-item"><a href="login.php" class="nav-link">Cerrar sesión</a></li>
             <li class="nav-item"><a href="consultarRestaurantes.php" class="nav-link">Gestión de Restaurantes</a></li>
             <li class="nav-item"><a href="consultarSouvenirs.php" class="nav-link">Gestión de Souvenirs</a></li>
-            <li class="nav-item"><a href="gestionRecetas.php" class="nav-link">Gestión de Recetas</a></li>
-            <li class="nav-item"><a href="consultarMensajes.php" class="nav-link">Mensajes</a></li>
+            <li class="nav-item"><a href="consultarRecetas.php" class="nav-link">Gestión de Recetas</a></li>
             ';
                 }
             else
@@ -186,7 +185,7 @@
 	    				</div>
 	    				<div class="d-me-flex">
 	    					<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="Apellidos">
+		    					<input type="text" class="form-control" placeholder="Telefono">
 		    				</div>
 	    				</div>
 	    				<div class="form-group">
