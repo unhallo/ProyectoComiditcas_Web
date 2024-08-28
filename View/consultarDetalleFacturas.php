@@ -39,7 +39,7 @@
                                 <table style= "color: #fac564;" id="tablaDetalleFacturas" class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Producto</th>
+                                            <th>Souvenir</th>
                                             <th>Cantidad</th>  
                                             <th>Precio</th>                                   
                                             <th>SubTotal</th>
