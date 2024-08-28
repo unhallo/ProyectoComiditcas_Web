@@ -28,12 +28,12 @@
         ?>
 	    		<div class="col-md-6 appointment ftco-animate">
           <?php
-            Contactenos()
+              Contactenos()
           ?>
-	    		</div>    			
-    		</div>
-    	</div>
-    </section>
+                            </div>    			
+                          </div>
+                        </div>
+                      </section>
 
     <footer class="ftco-footer ftco-section img">
     	<div class="overlay"></div>
